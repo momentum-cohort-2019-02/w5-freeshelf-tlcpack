@@ -10,6 +10,8 @@ class Book(models.Model):
 
     description = models.TextField(max_length=1000, help_text='Enter a brief description of the book')
 
+    category = models.ForeignKey('Category', on_delete=models.SET_NULL, null=True, help_text='For which language is this book?')
+
     #URL field, need to add way to ensure unique URL
     url = models.URLField(max_length=250)
 
@@ -27,3 +29,13 @@ class Book(models.Model):
         return reverse('book-detail', args=[str(self.id)])
 
 
+class Category(models.Model):
+    language = models.CharField(max_length=100)
+
+    # slug = models.SlugField(unique=False)
+
+    def get_absolute_url(self):
+        return reverse('category-detail', args=[str(self.id)])
+
+    def __str__(self):
+        return self.language

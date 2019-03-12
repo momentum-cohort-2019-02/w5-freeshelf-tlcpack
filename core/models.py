@@ -15,7 +15,7 @@ class Book(models.Model):
     #URL field, need to add way to ensure unique URL
     url = models.URLField(max_length=250)
 
-    slug = models.SlugField(unique=True)
+    # slug = models.SlugField(unique=True)
 
     date = models.DateField(auto_now_add=True)
 

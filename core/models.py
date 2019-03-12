@@ -15,12 +15,10 @@ class Book(models.Model):
     #URL field, need to add way to ensure unique URL
     url = models.URLField(max_length=250)
 
-    # slug = models.SlugField(unique=True)
-
     date = models.DateField(auto_now_add=True)
 
     class Meta:
-        ordering = ['date']
+        ordering = ['-date']
     
     def __str__(self):
         return self.title
@@ -32,7 +30,7 @@ class Book(models.Model):
 class Category(models.Model):
     language = models.CharField(max_length=100)
 
-    # slug = models.SlugField(unique=False)
+    # slug = models.SlugField(unique=True)
 
     def get_absolute_url(self):
         return reverse('category-detail', args=[str(self.id)])

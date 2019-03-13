@@ -11,8 +11,8 @@ def index(request):
     all_categories = Category.objects.all()
 
     context = {
-        'num_books': all_books,
-        'num_categories': all_categories,
+        'all_books': all_books,
+        'all_categories': all_categories,
     }
 
     return render(request, 'index.html', context=context)

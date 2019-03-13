@@ -1,7 +1,12 @@
 from django.db import models
 from django.urls import reverse
+from django.utils.text import slugify
+from django.contrib.auth import get_user_model
 
 # Create your models here.
+
+User = get_user_model()
+
 class Book(models.Model):
     """Model representing a book"""
     title = models.CharField(max_length=250)
@@ -17,6 +22,27 @@ class Book(models.Model):
 
     date = models.DateField(auto_now_add=True)
 
+    # making slug
+    # slug = models.SlugField(unique=True)
+
+    # def save(self, *args, **kwargs):
+    #     self.set_slug()
+    #     super().save(*args, **kwargs)
+
+    # def set_slug(self):
+    #     if self.slug:
+    #         return
+
+    #     base_slug = slugify(self.title)
+    #     slug = base_slug
+    #     n = 0
+
+    #     while Book.objects.filter(slug=slug).count():
+    #         n += 1
+    #         slug = base_slug + "-" + str(n)
+
+    #     self.slug = slug
+
     class Meta:
         ordering = ['-date']
     
@@ -30,7 +56,26 @@ class Book(models.Model):
 class Category(models.Model):
     language = models.CharField(max_length=100)
 
+    # making slug
     # slug = models.SlugField(unique=True)
+
+    # def save(self, *args, **kwargs):
+    #     self.set_slug()
+    #     super().save(*args, **kwargs)
+
+    # def set_slug(self):
+    #     if self.slug:
+    #         return
+
+    #     base_slug = slugify(self.title)
+    #     slug = base_slug
+    #     n = 0
+
+    #     while Category.objects.filter(slug=slug).count():
+    #         n += 1
+    #         slug = base_slug + "-" + str(n)
+
+    #     self.slug = slug
 
     def get_absolute_url(self):
         return reverse('category-detail', args=[str(self.id)])

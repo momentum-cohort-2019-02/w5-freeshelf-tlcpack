@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    <h1>{{ book.title }}</h1>
+
+    <p><strong>Author: </strong>{{ book.author }}<a></p>
+    <p><strong>Description: </strong><br>{{ book.description }}</p>
+    <p><strong>Category: </strong><br><a href="{% url 'category-detail' book.category.pk %}">{{ book.category }}</a></p>
+    <p><strong>URL: </strong><br><a href="{% url '{{ book.url }}' %}">{{ book.url }}</a></p>
+    <p><strong>Post date: </strong>{{ book.date }}</p>
+
+{% endblock %}

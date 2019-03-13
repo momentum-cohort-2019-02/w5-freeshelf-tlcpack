@@ -8,3 +8,5 @@ urlpatterns =[
     path('categories/', views.CategoryListView.as_view(), name='category'),
     path('category/<int:pk>', views.CategoryDetailView.as_view(), name='category-detail')
 ]
+
+# don't think I need CategoryListView. Not really using the list of languages for this exercise, but could be helpful as an add-on

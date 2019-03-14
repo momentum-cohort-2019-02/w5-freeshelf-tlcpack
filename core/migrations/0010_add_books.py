@@ -17,6 +17,8 @@ def load_book_data(apps, schema_editor):
         reader = csv.DictReader(file)
         for row in reader:
             book_title = row['title']
+            book_category = Category(language=row['category'])
+            
             # Don't create book if title matches existing record
             if Book.objects.filter(title=book_title).count():
                 continue
@@ -25,8 +27,8 @@ def load_book_data(apps, schema_editor):
                 author = row['author'],
                 description = row['description'],
                 url = row['url'],
-                # category = row['category'], - giving a category string error
-                # slug = slugify(row['title']) - TypeError: 'slug' is an invalid keyword argument for this function
+                category = book_category, 
+                slug = slugify(row['title']) # TypeError: 'slug' is an invalid keyword argument for this function
             )
             book.save()
 

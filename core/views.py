@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from core.models import Book, Category
 from django.views import generic
 
@@ -32,3 +32,10 @@ class CategoryListView(generic.ListView):
 class CategoryDetailView(generic.DetailView):
     model = Category
     
+# def book_detail_view(request, slug):
+#     book = get_object_or_404(Book, slug=slug)
+#     return render(request, 'core/book_detail.html', {'book': book})
+
+# def category_list_view(request, pk):
+#     category = get_object_or_404(Category, pk=pk)
+#     return render(request, 'core/category_list.html', {'category': category})

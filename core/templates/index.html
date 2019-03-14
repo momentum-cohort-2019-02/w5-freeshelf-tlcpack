@@ -15,7 +15,7 @@
       <h1 class="white">Freeshelf</h1>
     </div>
     <div id="account-menu">
-      <a class="washed-blue" href="{% url 'auth_login' %}">Login</a> | <a class="washed-blue" href="#">Register</a>
+      <a class="washed-blue" href="{% url 'auth_login' %}">Login</a> | <a class="washed-blue" href="{% url 'registration_register' %}">Register</a>
     </div>
   </header>
   <nav id="category-nav" class="flex items-center">
@@ -25,7 +25,7 @@
     {% if all_categories %}
     <ul class="list ml1 pa0 flex flex-wrap">
       {% for category in all_categories %}
-      <li class="mr2 pr2 bw1 br"><a href="{% url 'category-list' pk=category.pk %}">{{ category }}</a></li>
+      <li class="mr2 pr2 bw1 br"><a href="{% url 'category-detail' pk=category.pk %}">{{ category }}</a></li>
       {% endfor %}
     </ul>
     {% endif %}

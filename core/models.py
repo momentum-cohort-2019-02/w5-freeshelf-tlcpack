@@ -22,6 +22,10 @@ class Book(models.Model):
 
     date = models.DateField(auto_now_add=True)
 
+    def display_book_category(self):
+        """Create a string for Category. This is required to display genre in Admin.     """
+        return ', '.join(category.language for category in self.category.all()[:3])
+
     # making slug
     # slug = models.SlugField(unique=True)
 

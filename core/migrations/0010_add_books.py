@@ -25,8 +25,8 @@ def load_book_data(apps, schema_editor):
                 author = row['author'],
                 description = row['description'],
                 url = row['url'],
-                category = row['category'],
-                slug = slugify(row['title'])
+                # category = row['category'], - giving a category string error
+                # slug = slugify(row['title']) - TypeError: 'slug' is an invalid keyword argument for this function
             )
             book.save()
 

@@ -6,7 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link rel="stylesheet" href="https://unpkg.com/tachyons@4.10.0/css/tachyons.min.css" />
-  <title>Freeshelf</title>
+  <title>Freeshelf {% block title %} - a library of free resources {% endblock%}</title>
+  {% block meta %}{% endblock %}
 </head>
 
 <body class="sans-serif pv2 ph4">
@@ -18,5 +19,5 @@
       <a class="washed-blue" href="#">Login</a> | <a class="washed-blue" href="#">Register</a>
     </div>
   </header>
-
-  
+  {% block content %}{% endblock %}
+</body>

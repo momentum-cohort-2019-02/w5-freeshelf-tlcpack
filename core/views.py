@@ -27,7 +27,7 @@ class BookDetailView(generic.DetailView):
 
 class CategoryListView(generic.ListView):
     model = Category
-    paginate_by = 5
+    
 
 class CategoryDetailView(generic.DetailView):
     model = Category

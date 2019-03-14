@@ -24,7 +24,7 @@ class Book(models.Model):
 
 
     # making slug
-    # slug = models.SlugField(unique=True)
+    # slug = models.SlugField()
 
     # def get_slug(self):
     #     if self.slug:

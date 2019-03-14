@@ -10,6 +10,7 @@ from django.utils.text import slugify
 def load_book_data(apps, schema_editor):
     """Read a CSV file of books and add to database"""
     Book = apps.get_model('core', 'Book')
+    Category = apps.get_model('core', 'Category')
     datapath = os.path.join(settings.BASE_DIR, 'initial_data')
     datafile = os.path.join(datapath, 'books.csv')
 
@@ -17,7 +18,7 @@ def load_book_data(apps, schema_editor):
         reader = csv.DictReader(file)
         for row in reader:
             book_title = row['title']
-            book_category = Category(language=row['category'])
+            book_category, _ = Category.objects.get_or_create(language=row['category'])
             
             # Don't create book if title matches existing record
             if Book.objects.filter(title=book_title).count():
@@ -25,10 +26,10 @@ def load_book_data(apps, schema_editor):
             book = Book(
                 title = row['title'],
                 author = row['author'],
+                category = book_category,
                 description = row['description'],
                 url = row['url'],
-                category = book_category, 
-                slug = slugify(row['title']) # TypeError: 'slug' is an invalid keyword argument for this function
+                # slug = slugify(row['title']) # TypeError: 'slug' is an invalid keyword argument for this function
             )
             book.save()
 

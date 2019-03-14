@@ -37,9 +37,9 @@
         {% if all_books %}
       <ul>
         {% for book in all_books %}
-        <li>
-          <div class="normal f3"><a href="{{ book.get_absolute_url }}">{{ book.title }}</a><span class="f4">  By: {{ book.author }}</span></div>
-            <p class="lh-copy">{{ book.description }}</p>
+        <li class="list p10 ba br4 pa3 ma4">
+          <div class="f4"><a href="{{ book.get_absolute_url }}">{{ book.title }}</a><span class="f5">  By: {{ book.author }}</span></div>
+            <p class="lh-copy">{{ book.description|truncatewords:20 }}</p>
             <div class="flex">
               <div class="mr2 pr2 bw1 br green">
                 Favorited XX times

@@ -4,6 +4,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from core.models import Book, Category
 from django.views import generic
 from django.contrib import messages
+from django.http import HttpResponseRedirect
 
 # Create your views here.
 def index(request):
@@ -36,7 +37,7 @@ class CategoryDetailView(generic.DetailView):
     model = Category
     
 @require_http_methods(['POST'])
-# @login_required
+@login_required
 def book_favorite_view(request, book_pk):
     book = get_object_or_404(Book, pk=book_pk)
 

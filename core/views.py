@@ -1,6 +1,9 @@
+from django.contrib.auth.decorators import login_required
+from django.views.decorators.http import require_http_methods
 from django.shortcuts import render, get_object_or_404
 from core.models import Book, Category
 from django.views import generic
+from django.contrib import messages
 
 # Create your views here.
 def index(request):
@@ -32,6 +35,23 @@ class CategoryListView(generic.ListView):
 class CategoryDetailView(generic.DetailView):
     model = Category
     
+@require_http_methods(['POST'])
+@login_required
+def book_favorite_view(request, book_pk):
+    book = get_object_or_404(Book, pk=book_pk)
+
+    # Toggle whether or not book is favorited
+
+    favorite, created = request.user.favorite_set.get_or_create(book=book)
+
+    if created:
+        messages.success(request, f"You have favorited {book.name}.")
+    else:
+        messages.info(request, f"You have unfavorited {book.name}.")
+        favorite.delete()
+
+    return redirect(book.get_absolute_url())
+
 # def book_detail_view(request, slug):
 #     book = get_object_or_404(Book, slug=slug)
 #     return render(request, 'core/book_detail.html', {'book': book})

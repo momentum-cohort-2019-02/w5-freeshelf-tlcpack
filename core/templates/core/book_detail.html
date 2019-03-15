@@ -9,5 +9,21 @@
     <p><strong>Category: </strong><br><a href="{% url 'category-detail' book.category.pk %}">{{ book.category }}</a></p>
     <p><strong>URL: </strong><br><a href="{{ book.url }}">{{ book.url }}</a></p>
     <p><strong>Post date: </strong>{{ book.date }}</p>
+    <p><strong>Favorites: </strong>{{ book.favorited_by.count}}</p>
+
+    {% if request.user.is_authenticated %}
+    <form action="{% url 'book_favorite' book_pk=book.pk %}" method="POST">
+        {% csrf_token %}
+        <button type="submit">
+            {% if book in request.user.favorite_books.all %}
+                Unfavorite
+            {% else %}
+                Favorite
+            {% endif %}
+            this book
+        </button>
+    </form>
+    {% endif %}
+        
 
 {% endblock %}

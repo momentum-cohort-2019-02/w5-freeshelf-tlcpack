@@ -17,7 +17,12 @@
       <h1 class="white"><a href="{% url 'index' %}">Freeshelf</a></h1>
     </div>
     <div id="account-menu">
-      <a class="washed-blue" href="{% url 'auth_login' %}">Login</a> | <a class="washed-blue" href="{% url 'registration_register' %}">Register</a>
+    {% if request.user.is_authenticated %}
+      <a class="no-underline white">{{ user.username }}</a>
+      <a class="no-underline white" href="{% url 'auth_logout' %}">Logout</a>
+    {% else %}
+      <a class="no-underline white" href="{% url 'auth_login' %}">Login</a> | <a class="no-underline white" href="{% url 'registration_register' %}">Register</a>
+    {% endif %}
     </div>
   </header>
   {% block content %}{% endblock %}

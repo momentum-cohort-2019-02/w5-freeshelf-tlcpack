@@ -22,7 +22,8 @@ class Book(models.Model):
 
     date = models.DateField(auto_now_add=True)
 
-    favorited_by = models.ManyToManyField(to=User, related_name='favorite_books')
+    favorited_by = models.ManyToManyField(to=User, related_name='favorite_books', through='Favorite')
+    favorited_by1 = models.ForeignKey(to=User, related_name='favorited_books', on_delete=models.CASCADE, null=True, blank=True)
 
 
     # making slug
@@ -92,7 +93,7 @@ class Category(models.Model):
     def __str__(self):
         return self.language
 
-
+# may need to remove this model for favorite functionality
 class Favorite(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     book = models.ForeignKey(Book, on_delete=models.CASCADE)

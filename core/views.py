@@ -43,7 +43,7 @@ def book_favorite_view(request, book_pk):
 
     # Toggle whether or not book is favorited
 
-    favorite, created = request.user.favorite_set.get_or_create(book=book)
+    favorite, created = request.user.favorited_books.get_or_create(book=book)
 
     if created:
         messages.success(request, f"You have favorited {book.title}.")

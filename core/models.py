@@ -66,25 +66,25 @@ class Category(models.Model):
     language = models.CharField(max_length=100)
 
     # making slug
-    # slug = models.SlugField(unique=True)
+    slug = models.SlugField(null=True, blank=True)
 
-    # def save(self, *args, **kwargs):
-    #     self.set_slug()
-    #     super().save(*args, **kwargs)
+    def save(self, *args, **kwargs):
+        self.set_slug()
+        super().save(*args, **kwargs)
 
-    # def set_slug(self):
-    #     if self.slug:
-    #         return
+    def set_slug(self):
+        if self.slug:
+            return
 
-    #     base_slug = slugify(self.title)
-    #     slug = base_slug
-    #     n = 0
+        base_slug = slugify(self.language)
+        slug = base_slug
+        n = 0
 
-    #     while Category.objects.filter(slug=slug).count():
-    #         n += 1
-    #         slug = base_slug + "-" + str(n)
+        while Category.objects.filter(slug=slug).count():
+            n += 1
+            slug = base_slug + "-" + str(n)
 
-    #     self.slug = slug
+        self.slug = slug
 
     def get_absolute_url(self):
         return reverse('category-detail', args=[str(self.id)])

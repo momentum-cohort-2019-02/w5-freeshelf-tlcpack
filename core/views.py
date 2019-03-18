@@ -43,13 +43,13 @@ def book_favorite_view(request, slug):
 
     # Toggle whether or not book is favorited
 
-    favorite, created = request.user.favorited_books.get_or_create(book=book)
+    favorite = request.user.favorited_books.add(book)
 
-    if created:
-        messages.success(request, f"You have favorited {book.title}.")
-    else:
-        messages.info(request, f"You have unfavorited {book.title}.")
-        favorite.delete()
+    # if book in favorite:
+    #     messages.success(request, f"You have favorited {book.title}.")
+    # else:
+    #     messages.info(request, f"You have unfavorited {book.title}.")
+    #     favorite.delete()
 
     return redirect(book.get_absolute_url())
 
@@ -58,5 +58,5 @@ def book_favorite_view(request, slug):
 #     return render(request, 'core/book_detail.html', {'book': book})
 
 # def category_list_view(request, pk):
-#     category = get_object_or_404(Category, pk=pk)
-#     return render(request, 'core/category_list.html', {'category': category})
+#     category = get_object_or_404(Category, slug=slug)
+#     return render(request, 'core/category_list.html', {'category': category}) 

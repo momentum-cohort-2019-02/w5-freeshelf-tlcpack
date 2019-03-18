@@ -30,7 +30,7 @@
     {% if all_categories %}
     <ul class="list ml1 pa0 flex flex-wrap">
       {% for category in all_categories %}
-      <li class="mr2 pr2 bw1 br f7 no-underline black hover-bg-light-green"><a href="{% url 'category-detail' pk=category.pk %}">{{ category }}</a></li>
+      <li class="mr2 pr2 bw1 br f7 no-underline black hover-bg-light-green"><a href="{% url 'category-detail' slug=category.slug %}">{{ category }}</a></li>
       {% endfor %}
     </ul>
     {% endif %}

@@ -38,8 +38,8 @@ class CategoryDetailView(generic.DetailView):
     
 @require_http_methods(['POST'])
 @login_required
-def book_favorite_view(request, book_pk):
-    book = get_object_or_404(Book, pk=book_pk)
+def book_favorite_view(request, slug):
+    book = get_object_or_404(Book, slug=slug)
 
     # Toggle whether or not book is favorited
 

@@ -58,7 +58,7 @@ class Book(models.Model):
         return self.title
 
     def get_absolute_url(self):
-        return reverse('book-detail', args=[str(self.id)])
+        return reverse('book-detail', args=[str(self.slug)])
 
 
 class Category(models.Model):
@@ -87,7 +87,7 @@ class Category(models.Model):
         self.slug = slug
 
     def get_absolute_url(self):
-        return reverse('category-detail', args=[str(self.id)])
+        return reverse('category-detail', args=[str(self.slug)])
 
     def __str__(self):
         return self.language

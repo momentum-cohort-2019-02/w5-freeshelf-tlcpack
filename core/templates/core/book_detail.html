@@ -12,7 +12,7 @@
     <p><strong>Favorites: </strong>{{ book.favorited_by.count}}</p>
 
     {% if request.user.is_authenticated %}
-    <form action="{% url 'book_favorite' book_pk=book.pk %}" method="POST">
+    <form action="{% url 'book_favorite' slug=book.slug %}" method="POST">
         {% csrf_token %}
         <button type="submit">
             {% if book in request.user.favorite_books.all %}
